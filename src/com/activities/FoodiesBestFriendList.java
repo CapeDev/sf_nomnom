@@ -1,4 +1,4 @@
-package com.pages;
+package com.activities;
 
 import android.app.Activity;
 import android.content.Context;

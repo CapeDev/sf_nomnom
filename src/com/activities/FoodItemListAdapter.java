@@ -1,4 +1,4 @@
-package com.pages;
+package com.activities;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -55,6 +55,8 @@ public class FoodItemListAdapter extends BaseAdapter {
 
         return view;
     }
+
+
 
     static class ViewHolder {
       TextView foodName;

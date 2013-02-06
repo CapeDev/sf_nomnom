@@ -1,4 +1,4 @@
-package com.pages;
+package com.activities;
 
 public class FoodItem {
     private String foodName;
