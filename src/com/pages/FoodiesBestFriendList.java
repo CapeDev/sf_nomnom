@@ -1,4 +1,4 @@
-package com.example;
+package com.pages;
 
 import android.app.Activity;
 import android.content.Context;
@@ -40,7 +40,7 @@ public class FoodiesBestFriendList extends Activity {
         button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, FoodiesBestFriend.class);
+                Intent intent = new Intent(context, RestaurantList.class);
                 startActivity(intent);
             }
         });

@@ -11,28 +11,5 @@
           android:layout_width="fill_parent"
           android:layout_height="wrap_content"
           android:text="Goto scrollable screen" />
-  <TextView
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:text="Foodie's Best Friend"
-      />
-  <ImageView
-     android:id="@+id/baklava"
-     android:src="@drawable/baklava"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     />
-  <ImageView
-     android:id="@+id/lambchops"
-     android:src="@drawable/lambchops"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     />
-  <ImageView
-     android:id="@+id/mousakka"
-     android:src="@drawable/mousakka"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     />
 </LinearLayout>
 

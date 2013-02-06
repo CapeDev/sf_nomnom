@@ -1,17 +1,13 @@
-package com.example;
+package com.pages;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-
-public class FoodiesBestFriend extends Activity {
+public class RestaurantList extends Activity {
 
     Button button;
 
@@ -21,19 +17,6 @@ public class FoodiesBestFriend extends Activity {
 
         setContentView(R.layout.main);
         addListenerOnButton();
-
-//        TextView text = new TextView(this);
-//        text.setText("Hello World!!!!!");
-//        setContentView(text);
-        ImageView bakalava_image = (ImageView) findViewById(R.id.baklava);
-        bakalava_image.setImageResource(R.drawable.baklava);
-
-        ImageView lambchops_image = (ImageView) findViewById(R.id.lambchops);
-        lambchops_image.setImageResource(R.drawable.lambchops);
-
-        ImageView mousakka_image = (ImageView) findViewById(R.id.mousakka);
-        mousakka_image.setImageResource(R.drawable.mousakka);
-
     }
 
     private void addListenerOnButton() {
