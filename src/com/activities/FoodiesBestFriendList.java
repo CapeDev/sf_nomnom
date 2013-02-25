@@ -35,7 +35,7 @@ public class FoodiesBestFriendList extends Activity {
     private void addListenerOnButton() {
         final Context context = this;
 
-        button = (Button) findViewById(R.id.button1);
+        button = (Button) findViewById(R.id.back_button);
 
         button.setOnClickListener(new OnClickListener() {
             @Override

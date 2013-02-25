@@ -18,7 +18,7 @@ public final class R {
         public static final int mousakka=0x7f020004;
     }
     public static final class id {
-        public static final int button1=0x7f050002;
+        public static final int back_button=0x7f050002;
         public static final int food_image=0x7f050000;
         public static final int food_name=0x7f050001;
         public static final int list_of_food_items=0x7f050003;
