@@ -1,4 +1,4 @@
-package com.activities;
+package com.thoughtworks.android.capedev;
 
 import android.provider.BaseColumns;
 

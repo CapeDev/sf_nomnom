@@ -1,10 +1,10 @@
-package com.activities;
+package com.thoughtworks.android.capedev;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import static com.activities.RestaurantTableContract.*;
+import static com.thoughtworks.android.capedev.RestaurantTableContract.*;
 
 public class RestaurantDbHelper extends SQLiteOpenHelper{
     public static final int DATABASE_VERSION = 1;

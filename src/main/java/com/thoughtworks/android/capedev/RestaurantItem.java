@@ -1,4 +1,4 @@
-package com.activities;
+package com.thoughtworks.android.capedev;
 
 public class RestaurantItem {
     private String restaurantName;
