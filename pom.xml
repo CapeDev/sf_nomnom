@@ -10,7 +10,7 @@
 
     <properties>
         <platform.version>4.1.1.4</platform.version>
-        <android.sdk.path>../dev_toolkit/sdk</android.sdk.path>
+        <android.sdk.path>${basedir}/../dev_toolkit/sdk</android.sdk.path>
     </properties>
 
     <dependencies>
@@ -30,6 +30,12 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>1.9.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.pivotallabs</groupId>
+            <artifactId>robolectric</artifactId>
+            <version>1.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

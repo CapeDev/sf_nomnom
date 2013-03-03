@@ -3,3 +3,5 @@ out/
 *.iml
 target/
 gen/
+tmp/
+classes/

@@ -17,7 +17,7 @@ public class FoodItemListAdapter extends BaseAdapter {
       R.drawable.baklava,
       R.drawable.lambchops,
       R.drawable.mousakka
-      };
+    };
 
     public FoodItemListAdapter(Context context, ArrayList<FoodItem> foodItems){
         foodItemsList = foodItems;
