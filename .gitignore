@@ -5,3 +5,5 @@ target/
 gen/
 tmp/
 classes/
+test_servers/
+*.png
