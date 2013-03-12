@@ -7,3 +7,4 @@ tmp/
 classes/
 test_servers/
 *.png
+local.properties
