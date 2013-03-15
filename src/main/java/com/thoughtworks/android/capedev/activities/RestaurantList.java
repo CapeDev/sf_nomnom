@@ -57,7 +57,7 @@ public class RestaurantList extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(context, FoodiesBestFriendList.class);
+                Intent intent = new Intent(context, RestaurantDetails.class);
                 startActivity(intent);
             }
         });

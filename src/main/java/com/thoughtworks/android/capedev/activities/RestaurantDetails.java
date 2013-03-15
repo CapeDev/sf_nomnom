@@ -13,7 +13,7 @@ import com.thoughtworks.android.capedev.R;
 
 import java.util.ArrayList;
 
-public class FoodiesBestFriendList extends Activity {
+public class RestaurantDetails extends Activity {
 
     Button button;
 
