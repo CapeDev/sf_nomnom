@@ -1,12 +1,14 @@
-package com.thoughtworks.android.capedev;
+package com.thoughtworks.android.capedev.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
+import com.thoughtworks.android.capedev.R;
+import com.thoughtworks.android.capedev.domain.RestaurantItem;
+
 import java.util.ArrayList;
 
 public class RestaurantListAdapter extends BaseAdapter {

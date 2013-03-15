@@ -1,4 +1,4 @@
-package com.thoughtworks.android.capedev;
+package com.thoughtworks.android.capedev.activities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.*;
+import com.thoughtworks.android.capedev.domain.FoodItem;
+import com.thoughtworks.android.capedev.adapters.FoodItemListAdapter;
+import com.thoughtworks.android.capedev.R;
+
 import java.util.ArrayList;
 
 public class FoodiesBestFriendList extends Activity {

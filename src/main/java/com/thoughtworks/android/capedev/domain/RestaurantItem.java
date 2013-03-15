@@ -1,4 +1,4 @@
-package com.thoughtworks.android.capedev;
+package com.thoughtworks.android.capedev.domain;
 
 public class RestaurantItem {
     private String restaurantName;

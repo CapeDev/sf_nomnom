@@ -1,4 +1,4 @@
-package com.thoughtworks.android.capedev;
+package com.thoughtworks.android.capedev.activities;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -9,8 +9,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
+import com.thoughtworks.android.capedev.*;
+import com.thoughtworks.android.capedev.adapters.RestaurantListAdapter;
+import com.thoughtworks.android.capedev.domain.RestaurantItem;
+
 import java.util.ArrayList;
 
 public class RestaurantList extends Activity {

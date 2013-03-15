@@ -1,5 +1,7 @@
 package com.thoughtworks.android.capedev;
 
+import com.thoughtworks.android.capedev.adapters.FoodItemListAdapter;
+import com.thoughtworks.android.capedev.domain.FoodItem;
 import com.xtremelabs.robolectric.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
