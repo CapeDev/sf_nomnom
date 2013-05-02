@@ -8,3 +8,4 @@ classes/
 test_servers/
 *.png
 local.properties
+vendor/
