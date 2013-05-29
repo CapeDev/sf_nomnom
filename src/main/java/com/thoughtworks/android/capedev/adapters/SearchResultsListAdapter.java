@@ -53,10 +53,7 @@ public class SearchResultsListAdapter extends BaseAdapter {
 
         final String mimeType = "text/html";
         final String encoding = "utf-8";
-        final String html = "<img height=\"80\" width=\"100\" src=\"" + searchResults.get(position).getGooglePlacesPictureUrl() + "\"/>";
-//        final String html = "<img height=\"80\" width=\"100\" src=\"" + searchResults.get(position).getGooglePlacesPictureUrl() + "\"/>";
-//        final String html = "<html><head><style>* {margin:0;padding:0;}</style></head><body><img height=\"80\" width=\"100\" src=\"\" + searchResults.get(position).getGooglePlacesPictureUrl() + \"\"/></body></html>";
-//        final String html = "<html><body><img height=\"50\" width=\"50\" src=\"\" + searchResults.get(position).getGooglePlacesPictureUrl() + \"\"/></body></html>";
+        final String html = "<html><head><style>* {margin:0;padding:0;}</style></head><img height=\"80\" width=\"100\" src=\"" + searchResults.get(position).getGooglePlacesPictureUrl() + "\"/></html>";
         holder.foodImage.loadData(html, mimeType, encoding);
 
         return view;
