@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.*;
 import com.thoughtworks.android.capedev.R;
+import com.thoughtworks.android.capedev.adapters.SearchResultsListAdapter;
+import com.thoughtworks.android.capedev.domain.SearchResult;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -27,10 +29,9 @@ import java.util.ArrayList;
 public class SearchWithLayout extends ListActivity {
 
     private SearchView searchBar;
-    private ListView resultList;
 
-    private ArrayAdapter<String> adapter;
-    private ArrayList<String> restaurants = new ArrayList<String>();
+    private SearchResultsListAdapter searchResultsAdapter;
+    private ArrayList<SearchResult> results = new ArrayList<SearchResult>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +44,15 @@ public class SearchWithLayout extends ListActivity {
         TextView searchText = (TextView) findViewById(searchBarId);
         searchText.setTextColor(Color.WHITE);
 
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, restaurants);
-        setListAdapter(adapter);
+        searchResultsAdapter = new SearchResultsListAdapter(this, results);
+        setListAdapter(searchResultsAdapter);
 
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String searchTerm) {
-                restaurants.clear();
-                adapter.notifyDataSetChanged();
-                new GetJson().execute("http://10.0.2.2:3000/search/" + searchTerm);
+                results.clear();
+                searchResultsAdapter.notifyDataSetChanged();
+                new GetJson().execute("http://10.0.2.2:3000/search");
                 return false;
             }
 
@@ -62,8 +63,8 @@ public class SearchWithLayout extends ListActivity {
         });
     }
 
-    public static JSONObject doGet(String url) {
-        JSONObject json = null;
+    public static JSONArray doGet(String url) {
+        JSONArray json = null;
         BufferedReader in = null;
         try {
             HttpClient client = new DefaultHttpClient();
@@ -83,8 +84,8 @@ public class SearchWithLayout extends ListActivity {
             }
             in.close();
             String page = sb.toString();
-            //System.out.println(page);
-            return new JSONObject(page);
+
+            return new JSONArray(page);
         } catch (ClientProtocolException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -106,14 +107,14 @@ public class SearchWithLayout extends ListActivity {
         return json;
     }
 
-    private class GetJson extends AsyncTask<String, Integer, JSONObject> {
+    private class GetJson extends AsyncTask<String, Integer, JSONArray> {
 
         @Override
-        protected JSONObject doInBackground(String... urls) {
+        protected JSONArray doInBackground(String... urls) {
             int count = urls.length;
             Log.d("urls.length", String.valueOf(urls.length));
 
-            JSONObject json = null;
+            JSONArray json = null;
             for (int i = 0; i < count; i++) {
                 json = doGet(urls[i]);
             }
@@ -121,27 +122,22 @@ public class SearchWithLayout extends ListActivity {
         }
 
         @Override
-        protected void onPostExecute(JSONObject jsonObject) {
-            JSONArray json = null;
-
-            try {
-                json = jsonObject.getJSONArray("results");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
+        protected void onPostExecute(JSONArray jsonArray) {
             String restaurantName = "";
             String dishName = "";
+            String picture = "";
 
-            for (int i=0; i < json.length(); i++){
-
+            for (int i=0; i < jsonArray.length(); i++){
                 try {
-                    JSONObject resultsJson = json.getJSONObject(i);
+                    JSONObject resultsJson = jsonArray.getJSONObject(i);
                     dishName = resultsJson.getString("name");
-                    restaurantName = resultsJson.getJSONObject("_links").getString("parent");
+                    restaurantName = resultsJson.getString("restaurant");
+                    picture = resultsJson.getString("picture");
 
-                    restaurants.add(dishName + " @ " + restaurantName );
-                    adapter.notifyDataSetChanged();
+                    Log.d("picture_url", picture);
+                    results.add(new SearchResult(dishName, restaurantName, picture));
+                    searchResultsAdapter.notifyDataSetChanged();
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
