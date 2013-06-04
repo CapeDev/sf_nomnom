@@ -42,6 +42,7 @@ public class SearchResultsListAdapter extends BaseAdapter {
            holder.foodName = (TextView) view.findViewById(R.id.food_name);
            holder.restaurantName = (TextView) view.findViewById(R.id.restaurant_name);
            holder.foodImage = (WebView) view.findViewById(R.id.food_image);
+           holder.distance = (TextView) view.findViewById(R.id.distance);
 
            view.setTag(holder);
         } else {
@@ -56,11 +57,14 @@ public class SearchResultsListAdapter extends BaseAdapter {
         final String html = "<html><head><style>* {margin:0;padding:0;}</style></head><img height=\"80\" width=\"100\" src=\"" + searchResults.get(position).getGooglePlacesPictureUrl() + "\"/></html>";
         holder.foodImage.loadData(html, mimeType, encoding);
 
+        holder.distance.setText(searchResults.get(position).getDistance());
+
         return view;
     }
 
     static class ViewHolder {
       TextView foodName;
+      TextView distance;
       TextView restaurantName;
       WebView foodImage;
      }

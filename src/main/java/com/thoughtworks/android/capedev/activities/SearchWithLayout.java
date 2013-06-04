@@ -126,6 +126,7 @@ public class SearchWithLayout extends ListActivity {
             String restaurantName = "";
             String dishName = "";
             String picture = "";
+            String distance = "";
 
             for (int i=0; i < jsonArray.length(); i++){
                 try {
@@ -133,9 +134,10 @@ public class SearchWithLayout extends ListActivity {
                     dishName = resultsJson.getString("name");
                     restaurantName = resultsJson.getString("restaurant");
                     picture = resultsJson.getString("picture");
+                    distance = resultsJson.getString("latitude");
 
                     Log.d("picture_url", picture);
-                    results.add(new SearchResult(dishName, restaurantName, picture));
+                    results.add(new SearchResult(dishName, restaurantName, picture, distance));
                     searchResultsAdapter.notifyDataSetChanged();
 
                 } catch (JSONException e) {

@@ -4,6 +4,7 @@ public class SearchResult {
     private String resultName;
     private String resultLocation;
     private String googlePlacesPictureUrl;
+    private String distance;
 
     public String getResultName() {
         return resultName;
@@ -29,9 +30,18 @@ public class SearchResult {
         this.googlePlacesPictureUrl = googlePlacesPictureUrl;
     }
 
-    public SearchResult(String name, String location, String pictureUrl){
+    public SearchResult(String name, String location, String pictureUrl, String distance){
         this.resultName = name;
         this.resultLocation = location;
         this.googlePlacesPictureUrl = pictureUrl;
+        this.distance = distance;
+    }
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
     }
 }
