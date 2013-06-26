@@ -52,7 +52,7 @@ public class SearchWithLayout extends ListActivity {
             public boolean onQueryTextSubmit(String searchTerm) {
                 results.clear();
                 searchResultsAdapter.notifyDataSetChanged();
-                new GetJson().execute("http://10.0.2.2:3000/search");
+                new GetJson().execute("http://nom-nom-rails.herokuapp.com/search");
                 return false;
             }
 
