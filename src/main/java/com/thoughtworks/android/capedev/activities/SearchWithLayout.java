@@ -52,7 +52,7 @@ public class SearchWithLayout extends ListActivity {
             public boolean onQueryTextSubmit(String searchTerm) {
                 results.clear();
                 searchResultsAdapter.notifyDataSetChanged();
-                new GetJson().execute("http://nom-nom-rails.herokuapp.com/search");
+                    new GetJson().execute("http://10.0.2.2:3000/search?latitude=37.76313&longitude=-122.42398");
                 return false;
             }
 
@@ -134,9 +134,9 @@ public class SearchWithLayout extends ListActivity {
                     dishName = resultsJson.getString("name");
                     restaurantName = resultsJson.getString("restaurant");
                     picture = resultsJson.getString("picture");
-                    distance = resultsJson.getString("latitude");
+                    distance = resultsJson.getString("distance_away");
 
-                    Log.d("picture_url", picture);
+                    Log.d("distance", distance);
                     results.add(new SearchResult(dishName, restaurantName, picture, distance));
                     searchResultsAdapter.notifyDataSetChanged();
 

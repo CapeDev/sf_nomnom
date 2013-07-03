@@ -57,7 +57,7 @@ public class SearchResultsListAdapter extends BaseAdapter {
         final String html = "<html><head><style>* {margin:0;padding:0;}</style></head><img height=\"80\" width=\"100\" src=\"" + searchResults.get(position).getGooglePlacesPictureUrl() + "\"/></html>";
         holder.foodImage.loadData(html, mimeType, encoding);
 
-        holder.distance.setText(searchResults.get(position).getDistance());
+        holder.distance.setText(searchResults.get(position).getDistance() + " miles away");
 
         return view;
     }
