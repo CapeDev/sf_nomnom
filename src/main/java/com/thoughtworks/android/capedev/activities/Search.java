@@ -26,7 +26,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
-public class SearchWithLayout extends ListActivity {
+public class Search extends ListActivity {
 
     private SearchView searchBar;
 
