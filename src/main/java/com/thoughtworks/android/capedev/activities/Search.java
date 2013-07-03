@@ -1,10 +1,16 @@
 package com.thoughtworks.android.capedev.activities;
 
 import android.app.ListActivity;
+import android.content.Context;
 import android.graphics.Color;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Debug;
 import android.util.Log;
+import android.view.View;
 import android.widget.*;
 import com.thoughtworks.android.capedev.R;
 import com.thoughtworks.android.capedev.adapters.SearchResultsListAdapter;
@@ -33,9 +39,17 @@ public class Search extends ListActivity {
     private SearchResultsListAdapter searchResultsAdapter;
     private ArrayList<SearchResult> results = new ArrayList<SearchResult>();
 
+    private float latitude = (float) 37.76313;
+    private float longitude = (float) -122.42398;
+
+    private Context context;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        context = this;
 
         setContentView(R.layout.search);
 
@@ -47,12 +61,48 @@ public class Search extends ListActivity {
         searchResultsAdapter = new SearchResultsListAdapter(this, results);
         setListAdapter(searchResultsAdapter);
 
+        final TextView latitudeTextView = (TextView) findViewById(R.id.latitude);
+        latitudeTextView.setTextColor(Color.RED);
+        latitudeTextView.setText("Latitiude:    " + String.valueOf(latitude));
+
+        final TextView longitudeTextView = (TextView) findViewById(R.id.longitude);
+        longitudeTextView.setTextColor(Color.RED);
+        longitudeTextView.setText("Longitude    " + String.valueOf(longitude));
+
+        Button locator = (Button) findViewById(R.id.locator_button);
+        locator.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View view) {
+                final LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+
+                LocationListener locationListener = new LocationListener() {
+                    public void onLocationChanged(Location location) {
+                        latitudeTextView.setText("Latitiude:    " + String.valueOf(location.getLatitude()));
+                        longitudeTextView.setText("Longitude    " + String.valueOf(longitude));
+                        locationManager.removeUpdates(this);
+                    }
+
+                    public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+                    public void onProviderEnabled(String provider) {}
+
+                    public void onProviderDisabled(String provider) {}
+                  };
+
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+
+            }
+        });
+
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String searchTerm) {
                 results.clear();
                 searchResultsAdapter.notifyDataSetChanged();
-                    new GetJson().execute("http://10.0.2.2:3000/search?latitude=37.76313&longitude=-122.42398");
+
+                String requestParameters = String.format("latitude=%f&longitude=%f", latitude, longitude);
+                Log.d("RequestParameters", requestParameters);
+
+                new GetJson().execute("http://10.0.2.2:3000/search?" + requestParameters);
                 return false;
             }
 
