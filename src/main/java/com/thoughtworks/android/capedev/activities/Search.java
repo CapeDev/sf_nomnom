@@ -77,7 +77,7 @@ public class Search extends ListActivity {
                 LocationListener locationListener = new LocationListener() {
                     public void onLocationChanged(Location location) {
                         latitudeTextView.setText("Latitiude:    " + String.valueOf(location.getLatitude()));
-                        longitudeTextView.setText("Longitude    " + String.valueOf(longitude));
+                        longitudeTextView.setText("Longitude    " + String.valueOf(location.getLongitude()));
                         locationManager.removeUpdates(this);
                     }
 
@@ -99,7 +99,10 @@ public class Search extends ListActivity {
                 results.clear();
                 searchResultsAdapter.notifyDataSetChanged();
 
-                String requestParameters = String.format("latitude=%f&longitude=%f", latitude, longitude);
+                final LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+                Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+                String requestParameters = String.format("latitude=%f&longitude=%f", location.getLatitude() , location.getLongitude());
                 Log.d("RequestParameters", requestParameters);
 
                 new GetJson().execute("http://10.0.2.2:3000/search?" + requestParameters);
