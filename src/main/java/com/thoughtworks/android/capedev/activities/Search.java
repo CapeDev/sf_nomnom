@@ -8,10 +8,11 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Debug;
 import android.util.Log;
 import android.view.View;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.SearchView;
+import android.widget.TextView;
 import com.thoughtworks.android.capedev.R;
 import com.thoughtworks.android.capedev.adapters.SearchResultsListAdapter;
 import com.thoughtworks.android.capedev.domain.SearchResult;
@@ -102,7 +103,7 @@ public class Search extends ListActivity {
                 final LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
                 Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-                String requestParameters = String.format("latitude=%f&longitude=%f", location.getLatitude() , location.getLongitude());
+                String requestParameters = (location != null) ? String.format("latitude=%f&longitude=%f", location.getLatitude() , location.getLongitude()) : "";
                 Log.d("RequestParameters", requestParameters);
 
                 new GetJson().execute("http://10.0.2.2:3000/search?" + requestParameters);
