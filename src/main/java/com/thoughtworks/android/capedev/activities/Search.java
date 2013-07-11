@@ -106,7 +106,7 @@ public class Search extends ListActivity {
                 String requestParameters = (location != null) ? String.format("latitude=%f&longitude=%f", location.getLatitude() , location.getLongitude()) : "";
                 Log.d("RequestParameters", requestParameters);
 
-                new GetJson().execute("http://10.0.2.2:3000/search?" + requestParameters);
+                new GetJson().execute("http://nom-nom-rails.herokuapp.com//search?" + requestParameters);
                 return false;
             }
 

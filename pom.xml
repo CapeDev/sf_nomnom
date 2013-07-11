@@ -10,7 +10,7 @@
 
     <properties>
         <platform.version>4.1.1.4</platform.version>
-        <android.sdk.path>${sdk.dir}</android.sdk.path>
+        <android.sdk.path>/Users/srao/opensource/android/adt-bundle-mac/sdk</android.sdk.path>
     </properties>
 
     <dependencies>
@@ -19,6 +19,11 @@
             <artifactId>android</artifactId>
             <version>${platform.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.iharder</groupId>
+            <artifactId>base64</artifactId>
+            <version>2.3.8</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -45,7 +50,7 @@
             <plugin>
                 <groupId>com.jayway.maven.plugins.android.generation2</groupId>
                 <artifactId>android-maven-plugin</artifactId>
-                <version>3.5.0</version>
+                <version>3.6.0</version>
                 <configuration>
                     <androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
                     <assetsDirectory>${project.basedir}/assets</assetsDirectory>
@@ -53,6 +58,7 @@
                     <nativeLibrariesDirectory>${project.basedir}/src/main/native</nativeLibrariesDirectory>
                     <sdk>
                         <platform>17</platform>
+                        <path>/Users/srao/opensource/android/adt-bundle-mac/sdk</path>
                     </sdk>
                 </configuration>
                 <extensions>true</extensions>
