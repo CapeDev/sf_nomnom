@@ -58,7 +58,6 @@
                     <nativeLibrariesDirectory>${project.basedir}/src/main/native</nativeLibrariesDirectory>
                     <sdk>
                         <platform>17</platform>
-                        <path>/Users/srao/opensource/android/adt-bundle-mac/sdk</path>
                     </sdk>
                 </configuration>
                 <extensions>true</extensions>
