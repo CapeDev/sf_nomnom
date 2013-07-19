@@ -25,21 +25,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 
-public class CameraActivity extends Activity {
+public class CameraActivity extends NavigableActivity {
     private static final int CAMERA_REQUEST = 1888;
     private ImageView imageView;
-
-    @Override public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.search:
-                Intent intent = new Intent(this, Search.class);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,11 +67,5 @@ public class CameraActivity extends Activity {
 
             }
         }
-    }
-
-    @Override public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.navigation, menu);
-        return true;
     }
 }

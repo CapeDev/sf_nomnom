@@ -39,7 +39,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
-public class Search extends Activity {
+public class Search extends NavigableActivity {
 
     private SearchView searchBar;
     private ListView resultsList;
@@ -52,18 +52,6 @@ public class Search extends Activity {
     private float longitude = (float) -122.42398;
 
     private Context context;
-
-    @Override public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.add:
-                Intent intent = new Intent(this, CameraActivity.class);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -223,11 +211,4 @@ public class Search extends Activity {
             }
         }
     }
-
-    @Override public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.navigation, menu);
-        return true;
-    }
-
 }
