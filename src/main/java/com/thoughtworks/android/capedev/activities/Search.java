@@ -2,6 +2,7 @@ package com.thoughtworks.android.capedev.activities;
 
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
@@ -9,6 +10,9 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SearchView;
@@ -45,6 +49,17 @@ public class Search extends ListActivity {
 
     private Context context;
 
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.add:
+                Intent intent = new Intent(this, CameraActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +130,8 @@ public class Search extends ListActivity {
                 return false;
             }
         });
+
+
     }
 
     public static JSONArray doGet(String url) {
@@ -199,6 +216,12 @@ public class Search extends ListActivity {
                 }
             }
         }
+    }
+
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.navigation, menu);
+        return true;
     }
 
 }
