@@ -1,5 +1,6 @@
 package com.thoughtworks.android.capedev.activities;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import com.thoughtworks.android.capedev.R;
@@ -37,12 +39,14 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
-public class Search extends ListActivity {
+public class Search extends Activity {
 
     private SearchView searchBar;
+    private ListView resultsList;
 
     private SearchResultsListAdapter searchResultsAdapter;
     private ArrayList<SearchResult> results = new ArrayList<SearchResult>();
+
 
     private float latitude = (float) 37.76313;
     private float longitude = (float) -122.42398;
@@ -75,7 +79,9 @@ public class Search extends ListActivity {
         searchText.setTextColor(Color.WHITE);
 
         searchResultsAdapter = new SearchResultsListAdapter(this, results);
-        setListAdapter(searchResultsAdapter);
+
+        resultsList = (ListView) findViewById(R.id.results_list);
+        resultsList.setAdapter(searchResultsAdapter);
 
         final TextView latitudeTextView = (TextView) findViewById(R.id.latitude);
         latitudeTextView.setTextColor(Color.RED);
