@@ -1,5 +1,6 @@
 package com.thoughtworks.android.capedev.activities;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
@@ -30,4 +31,13 @@ public class NavigableActivity extends Activity {
         inflater.inflate(R.menu.navigation, menu);
         return true;
     }
+
+    protected void setUpActionBar() {
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+
 }
