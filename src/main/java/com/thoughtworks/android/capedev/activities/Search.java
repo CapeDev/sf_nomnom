@@ -1,7 +1,9 @@
 package com.thoughtworks.android.capedev.activities;
 
+import android.app.ActionBar;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
@@ -9,6 +11,9 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SearchView;
@@ -61,6 +66,7 @@ public class Search extends ListActivity {
 
         searchResultsAdapter = new SearchResultsListAdapter(this, results);
         setListAdapter(searchResultsAdapter);
+        setUpActionBar();
 
         final TextView latitudeTextView = (TextView) findViewById(R.id.latitude);
         latitudeTextView.setTextColor(Color.RED);
@@ -116,6 +122,27 @@ public class Search extends ListActivity {
             }
         });
     }
+
+    protected void setUpActionBar() {
+        ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    public void edit(MenuItem unused) {
+        Intent intent = new Intent(this, CameraActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.display_action_bar, menu);
+        return true;
+    }
+
+
 
     public static JSONArray doGet(String url) {
         JSONArray json = null;
