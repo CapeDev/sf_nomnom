@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+         <modelVersion>4.0.0</modelVersion>
     <groupId>com.thoughtworks.android.capedev</groupId>
     <artifactId>sf_nomnom</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -10,7 +10,6 @@
 
     <properties>
         <platform.version>4.1.1.4</platform.version>
-        <android.sdk.path>/Users/srao/opensource/android/adt-bundle-mac/sdk</android.sdk.path>
     </properties>
 
     <dependencies>
@@ -58,6 +57,7 @@
                     <nativeLibrariesDirectory>${project.basedir}/src/main/native</nativeLibrariesDirectory>
                     <sdk>
                         <platform>17</platform>
+                        <path>${sdk.dir}</path>
                     </sdk>
                 </configuration>
                 <extensions>true</extensions>
