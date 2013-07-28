@@ -136,6 +136,20 @@ public class Search extends NavigableActivity {
         }
     }
 
+    public void edit(MenuItem unused) {
+        Intent intent = new Intent(this, CameraActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.display_action_bar, menu);
+        return true;
+    }
+
+
+
     public static JSONArray doGet(String url) {
         JSONArray json = null;
         BufferedReader in = null;
