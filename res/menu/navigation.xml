@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
   <item android:id="@+id/search"
-        android:icon="@drawable/search"
+        android:icon="@drawable/search_for_craving"
         android:title="search for craving"
         android:showAsAction="ifRoom" />
 
   <item android:id="@+id/add"
         android:title="add craving"
-        android:icon="@drawable/camera_icon"
+        android:icon="@drawable/new_craving"
         android:showAsAction="ifRoom" />
 </menu>
