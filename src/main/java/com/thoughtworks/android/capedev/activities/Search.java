@@ -108,10 +108,15 @@ public class Search extends NavigableActivity {
                 final LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
                 Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-                String requestParameters = (location != null) ? String.format("latitude=%f&longitude=%f", location.getLatitude() , location.getLongitude()) : "";
+                String currentLatitude = (location!=null) ? String.valueOf(location.getLatitude()) : String.valueOf(latitude);
+                String currentLongitude = (location!=null) ? String.valueOf(location.getLongitude()) : String.valueOf(longitude);
+
+                String requestParameters = String.format("latitude=%s&longitude=%s", currentLatitude , currentLongitude);
                 Log.d("RequestParameters", requestParameters);
 
-                new GetJson().execute("http://nom-nom-rails.herokuapp.com//search?" + requestParameters);
+                Log.i("RequestUrl", "http://10.0.2.2:3000/search?" + requestParameters);
+
+                new GetJson().execute("http://10.0.2.2:3000/search?" + requestParameters);
                 return false;
             }
 
