@@ -1,10 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-    <Button android:id="@+id/button1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Camera"></Button>
-    <ImageView android:id="@+id/imageView1" android:layout_height="wrap_content" android:src="@drawable/icon" android:layout_width="wrap_content"></ImageView>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-</LinearLayout>
+  <TextView android:id="@+id/foodNameLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="Food      :"/>
+
+  <EditText android:id="@+id/foodName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/foodNameLabel"
+            android:layout_alignParentRight="true"/>
+
+  <TextView android:id="@+id/restaurantNameLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/foodName"
+            android:text="Restaurant:"/>
+
+  <EditText android:id="@+id/restaurantName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/restaurantNameLabel"
+            android:layout_below="@id/foodName"
+            android:layout_alignParentRight="true"/>
+
+  <Button android:id="@+id/locatorButton"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Locate Me!"
+          android:layout_below="@id/restaurantName"/>
+
+  <TextView android:id="@+id/latitudeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/locatorButton"
+            android:text="Latitude  :"
+            android:textColor="#FF0000"/>
+
+  <TextView android:id="@+id/latitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/locatorButton"
+            android:layout_toRightOf="@id/latitudeLabel"
+            android:textColor="#FF0000"/>
+
+  <TextView android:id="@+id/longitudeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/latitude"
+            android:text="Longitude :"
+            android:textColor="#FF0000"/>
+
+  <TextView android:id="@+id/longitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/latitude"
+            android:layout_toRightOf="@id/longitudeLabel"
+            android:textColor="#FF0000"/>
+
+  <ImageView android:id="@+id/foodImage"
+             android:layout_height="wrap_content"
+             android:src="@drawable/icon"
+             android:layout_width="wrap_content"
+             android:layout_below="@id/longitude"/>
+
+  <Button android:id="@+id/startCamera"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Take Picture"
+          android:layout_alignParentRight="true"
+          android:layout_toRightOf="@id/foodImage"
+          android:layout_below="@id/longitude"/>
+
+  <Button android:id="@+id/submitButton"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Submit"
+          android:layout_below="@id/startCamera"/>
+</RelativeLayout>
