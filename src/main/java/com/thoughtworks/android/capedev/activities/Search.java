@@ -18,6 +18,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import com.thoughtworks.android.capedev.R;
 import com.thoughtworks.android.capedev.adapters.SearchResultsListAdapter;
+import com.thoughtworks.android.capedev.constants.Domain;
 import com.thoughtworks.android.capedev.domain.SearchResult;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -111,12 +112,12 @@ public class Search extends NavigableActivity {
                 String currentLatitude = (location!=null) ? String.valueOf(location.getLatitude()) : String.valueOf(latitude);
                 String currentLongitude = (location!=null) ? String.valueOf(location.getLongitude()) : String.valueOf(longitude);
 
-                String requestParameters = String.format("latitude=%s&longitude=%s", currentLatitude , currentLongitude);
+                String requestParameters = String.format("search_term=%s&latitude=%s&longitude=%s", searchTerm, currentLatitude , currentLongitude);
                 Log.d("RequestParameters", requestParameters);
 
-                Log.i("RequestUrl", "http://10.0.2.2:3000/search?" + requestParameters);
+                Log.i("RequestUrl", Domain.SERVER_URL + "/search?" + requestParameters);
 
-                new GetJson().execute("http://10.0.2.2:3000/search?" + requestParameters);
+                new GetJson().execute(Domain.SERVER_URL + "/search?" + requestParameters);
                 return false;
             }
 

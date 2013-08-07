@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import com.thoughtworks.android.capedev.R;
+import com.thoughtworks.android.capedev.constants.Domain;
 import net.iharder.Base64;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -135,7 +136,7 @@ public class CameraActivity extends NavigableActivity {
             for (List<NameValuePair> nameValuePair : nameValuePairs) {
                 try {
                     HttpClient httpclient = new DefaultHttpClient();
-                    HttpPost httppost = new HttpPost("http://10.0.2.2:3000/add");
+                    HttpPost httppost = new HttpPost(Domain.SERVER_URL + "/add");
 
                     httppost.setEntity(new UrlEncodedFormEntity(nameValuePair));
 
