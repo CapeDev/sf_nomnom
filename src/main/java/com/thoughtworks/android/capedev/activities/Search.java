@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import com.thoughtworks.android.capedev.R;
+import com.thoughtworks.android.capedev.Tools.Tracker;
 import com.thoughtworks.android.capedev.adapters.SearchResultsListAdapter;
 import com.thoughtworks.android.capedev.constants.Domain;
 import com.thoughtworks.android.capedev.domain.SearchResult;
@@ -45,22 +46,20 @@ public class Search extends NavigableActivity {
     private SearchResultsListAdapter searchResultsAdapter;
     private ArrayList<SearchResult> results = new ArrayList<SearchResult>();
 
-    private double latitude = 37.76313;
-    private double longitude = -122.42398;
-
     private Context context;
 
     TextView latitudeTextView;
     TextView longitudeTextView;
 
-    LocationManager locationManager;
-    LocationListener locationListener;
+    Tracker tracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         context = this;
+
+        tracker = new Tracker(context);
 
         setContentView(R.layout.search);
 
@@ -75,32 +74,11 @@ public class Search extends NavigableActivity {
 
         latitudeTextView = (TextView) findViewById(R.id.latitude);
         latitudeTextView.setTextColor(Color.RED);
-        latitudeTextView.setText("Latitiude:    " + String.valueOf(latitude));
+        latitudeTextView.setText("Latitiude:    " + String.valueOf(tracker.getLatitude()));
 
         longitudeTextView = (TextView) findViewById(R.id.longitude);
         longitudeTextView.setTextColor(Color.RED);
-        longitudeTextView.setText("Longitude    " + String.valueOf(longitude));
-
-        locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-
-        locationListener = new LocationListener() {
-            public void onLocationChanged(Location location) {
-                latitude = location.getLatitude();
-                longitude = location.getLongitude();
-                latitudeTextView.setText("Latitiude:    " + String.valueOf(latitude));
-                longitudeTextView.setText("Longitude    " + String.valueOf(longitude));
-
-                locationManager.removeUpdates(this);
-            }
-
-            public void onStatusChanged(String provider, int status, Bundle extras) {}
-
-            public void onProviderEnabled(String provider) {}
-
-            public void onProviderDisabled(String provider) {}
-          };
-
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        longitudeTextView.setText("Longitude    " + String.valueOf(tracker.getLongitude()));
 
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -108,7 +86,7 @@ public class Search extends NavigableActivity {
                 results.clear();
                 searchResultsAdapter.notifyDataSetChanged();
 
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+                tracker.getLocation();
 
                 String query = null;
                 try {
@@ -206,12 +184,6 @@ public class Search extends NavigableActivity {
                 return;
             }
 
-            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-            if (location != null){
-                latitude = (float) location.getLatitude();
-                longitude = (float) location.getLongitude();
-            }
 
             for (int i=0; i < jsonArray.length(); i++){
                 try {
@@ -224,7 +196,7 @@ public class Search extends NavigableActivity {
                     double foodLongitude = resultsJson.getDouble("longitude");
 
                     float [] result = new float[1];
-                    Location.distanceBetween(latitude,longitude,foodLatitude,foodLongitude, result);
+                    Location.distanceBetween(tracker.getLatitude(),tracker.getLongitude(),foodLatitude,foodLongitude, result);
                     double distanceInKm =  (result[0]/1000.0 * 0.621);
                     double distanceInMiles =  (Math.round(distanceInKm*100.0)/100.0);
 
@@ -235,6 +207,8 @@ public class Search extends NavigableActivity {
                     e.printStackTrace();
                 }
             }
+
+            tracker.stopTracking();
         }
     }
 }
