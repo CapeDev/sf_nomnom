@@ -12,10 +12,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.TextView;
+import android.widget.*;
 import com.thoughtworks.android.capedev.R;
 import com.thoughtworks.android.capedev.adapters.SearchResultsListAdapter;
 import com.thoughtworks.android.capedev.constants.Domain;
@@ -197,6 +194,18 @@ public class Search extends NavigableActivity {
 
         @Override
         protected void onPostExecute(JSONArray jsonArray) {
+
+            Toast toast;
+
+            if (jsonArray.length() == 0){
+                toast = Toast.makeText(context, "No results found!!", Toast.LENGTH_SHORT);
+                toast.show();
+
+                searchBar.setQuery("",false);
+                
+                return;
+            }
+
             String restaurantName = "";
             String dishName = "";
             String picture = "";
