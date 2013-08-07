@@ -31,6 +31,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
@@ -209,7 +210,10 @@ public class Search extends NavigableActivity {
             String restaurantName = "";
             String dishName = "";
             String picture = "";
-            String distance = "";
+            double distance = 0;
+
+            double foodLatitude;
+            double foodLongitude;
 
             for (int i=0; i < jsonArray.length(); i++){
                 try {
@@ -217,10 +221,18 @@ public class Search extends NavigableActivity {
                     dishName = resultsJson.getString("name");
                     restaurantName = resultsJson.getString("restaurant");
                     picture = resultsJson.getString("picture");
-                    distance = resultsJson.getString("distance_away");
 
-                    Log.d("distance", distance);
-                    results.add(new SearchResult(dishName, restaurantName, picture, distance));
+                    foodLatitude = resultsJson.getDouble("latitude");
+                    foodLongitude = resultsJson.getDouble("longitude");
+
+                    float [] result = new float[1];
+                    Location.distanceBetween(latitude,longitude,foodLatitude,foodLongitude, result);
+                    distance =  (result[0]/1000.0 * 0.621);
+
+                    distance =  (Math.round(distance*100.0)/100.0);
+
+                    Log.d("distance", Double.toString(distance));
+                    results.add(new SearchResult(dishName, restaurantName, picture, Double.toString(distance)));
                     searchResultsAdapter.notifyDataSetChanged();
 
                 } catch (JSONException e) {
