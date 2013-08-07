@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import com.thoughtworks.android.capedev.R;
+import com.thoughtworks.android.capedev.Tools.Tracker;
 import com.thoughtworks.android.capedev.constants.Domain;
 import net.iharder.Base64;
 import org.apache.http.HttpEntity;
@@ -37,45 +38,21 @@ public class CameraActivity extends NavigableActivity {
     private EditText restaurantName;
     private EditText foodName;
 
-    private TextView latitude;
-    private TextView longitude;
+    private Tracker tracker;
 
     private Context context;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.camera);
 
+        context = getApplicationContext();
+        tracker = new Tracker(context);
+
+        setContentView(R.layout.camera);
         foodPicture = (ImageView) this.findViewById(R.id.foodImage);
         restaurantName = (EditText) this.findViewById(R.id.restaurantName);
         foodName = (EditText) this.findViewById(R.id.foodName);
-        longitude = (TextView) this.findViewById(R.id.longitude);
-        latitude = (TextView) this.findViewById(R.id.latitude);
-        context = getApplicationContext();
-
-        Button locator = (Button) findViewById(R.id.locatorButton);
-        locator.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View view) {
-                final LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-
-                LocationListener locationListener = new LocationListener() {
-                    public void onLocationChanged(Location location) {
-                        latitude.setText(String.valueOf(location.getLatitude()));
-                        longitude.setText(String.valueOf(location.getLongitude()));
-                        locationManager.removeUpdates(this);
-                    }
-
-                    public void onStatusChanged(String provider, int status, Bundle extras) {}
-
-                    public void onProviderEnabled(String provider) {}
-
-                    public void onProviderDisabled(String provider) {}
-                  };
-
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-            }
-        });
 
         Button submitButton = (Button) this.findViewById(R.id.submitButton);
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -86,9 +63,10 @@ public class CameraActivity extends NavigableActivity {
                     toast = Toast.makeText(context, "Enter the name of the food!", Toast.LENGTH_SHORT);
                 } else if (restaurantName.getText().length() == 0) {
                     toast = Toast.makeText(context, "Enter the name of the restaurant!", Toast.LENGTH_SHORT);
-                } else if (longitude.getText().length() == 0 || latitude.getText().length() == 0 ) {
-                    toast = Toast.makeText(context, "Enter your longitude and latitude!", Toast.LENGTH_SHORT);
-                } else {
+                }
+                else {
+                    tracker.getLocation();
+
                     Bitmap photo = ((BitmapDrawable) foodPicture.getDrawable()).getBitmap();
 
                     ByteArrayOutputStream bao = new ByteArrayOutputStream();
@@ -98,10 +76,12 @@ public class CameraActivity extends NavigableActivity {
 
                     List nameValuePairs = new ArrayList<NameValuePair>();
                     nameValuePairs.add(new BasicNameValuePair("name", foodName.getText().toString()));
-                    nameValuePairs.add(new BasicNameValuePair("longitude", longitude.getText().toString()));
-                    nameValuePairs.add(new BasicNameValuePair("latitude", latitude.getText().toString()));
+                    nameValuePairs.add(new BasicNameValuePair("longitude", String.valueOf(tracker.getLongitude())));
+                    nameValuePairs.add(new BasicNameValuePair("latitude", String.valueOf(tracker.getLatitude())));
                     nameValuePairs.add(new BasicNameValuePair("restaurant", restaurantName.getText().toString()));
                     nameValuePairs.add(new BasicNameValuePair("image", ba1));
+                    tracker.stopTracking();
+
                     new PostFoodItem().execute(nameValuePairs);
 
                     toast = Toast.makeText(getApplicationContext(), "Submitted!", Toast.LENGTH_SHORT);
