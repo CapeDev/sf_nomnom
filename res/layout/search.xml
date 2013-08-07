@@ -24,18 +24,10 @@
             android:layout_height="wrap_content"
       />
 
-  <Button android:id="@+id/locator_button"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:text="locate me"
-    />
-
   <ListView xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent"
   android:layout_height="fill_parent"
   android:id="@+id/results_list"
   />
-
-
 
 </LinearLayout>

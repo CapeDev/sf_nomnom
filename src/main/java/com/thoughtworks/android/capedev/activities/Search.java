@@ -45,11 +45,16 @@ public class Search extends NavigableActivity {
     private SearchResultsListAdapter searchResultsAdapter;
     private ArrayList<SearchResult> results = new ArrayList<SearchResult>();
 
-
-    private float latitude = (float) 37.76313;
-    private float longitude = (float) -122.42398;
+    private double latitude = 37.76313;
+    private double longitude = -122.42398;
 
     private Context context;
+
+    TextView latitudeTextView;
+    TextView longitudeTextView;
+
+    LocationManager locationManager;
+    LocationListener locationListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,43 +73,42 @@ public class Search extends NavigableActivity {
         resultsList = (ListView) findViewById(R.id.results_list);
         resultsList.setAdapter(searchResultsAdapter);
 
-        final TextView latitudeTextView = (TextView) findViewById(R.id.latitude);
+        latitudeTextView = (TextView) findViewById(R.id.latitude);
         latitudeTextView.setTextColor(Color.RED);
         latitudeTextView.setText("Latitiude:    " + String.valueOf(latitude));
 
-        final TextView longitudeTextView = (TextView) findViewById(R.id.longitude);
+        longitudeTextView = (TextView) findViewById(R.id.longitude);
         longitudeTextView.setTextColor(Color.RED);
         longitudeTextView.setText("Longitude    " + String.valueOf(longitude));
 
-        Button locator = (Button) findViewById(R.id.locator_button);
-        locator.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View view) {
-                final LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
-                LocationListener locationListener = new LocationListener() {
-                    public void onLocationChanged(Location location) {
-                        latitudeTextView.setText("Latitiude:    " + String.valueOf(location.getLatitude()));
-                        longitudeTextView.setText("Longitude    " + String.valueOf(location.getLongitude()));
-                        locationManager.removeUpdates(this);
-                    }
+        locationListener = new LocationListener() {
+            public void onLocationChanged(Location location) {
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+                latitudeTextView.setText("Latitiude:    " + String.valueOf(latitude));
+                longitudeTextView.setText("Longitude    " + String.valueOf(longitude));
 
-                    public void onStatusChanged(String provider, int status, Bundle extras) {}
-
-                    public void onProviderEnabled(String provider) {}
-
-                    public void onProviderDisabled(String provider) {}
-                  };
-
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-
+                locationManager.removeUpdates(this);
             }
-        });
+
+            public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+            public void onProviderEnabled(String provider) {}
+
+            public void onProviderDisabled(String provider) {}
+          };
+
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String searchTerm) {
                 results.clear();
                 searchResultsAdapter.notifyDataSetChanged();
+
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
                 String query = null;
                 try {
@@ -202,38 +206,29 @@ public class Search extends NavigableActivity {
                 return;
             }
 
-            final LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
             Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-            latitude = (float) location.getLatitude();
-            longitude = (float) location.getLongitude();
-
-            String restaurantName = "";
-            String dishName = "";
-            String picture = "";
-            double distance = 0;
-
-            double foodLatitude;
-            double foodLongitude;
+            if (location != null){
+                latitude = (float) location.getLatitude();
+                longitude = (float) location.getLongitude();
+            }
 
             for (int i=0; i < jsonArray.length(); i++){
                 try {
                     JSONObject resultsJson = jsonArray.getJSONObject(i);
-                    dishName = resultsJson.getString("name");
-                    restaurantName = resultsJson.getString("restaurant");
-                    picture = resultsJson.getString("picture");
+                    String dishName = resultsJson.getString("name");
+                    String restaurantName = resultsJson.getString("restaurant");
+                    String picture = resultsJson.getString("picture");
 
-                    foodLatitude = resultsJson.getDouble("latitude");
-                    foodLongitude = resultsJson.getDouble("longitude");
+                    double foodLatitude = resultsJson.getDouble("latitude");
+                    double foodLongitude = resultsJson.getDouble("longitude");
 
                     float [] result = new float[1];
                     Location.distanceBetween(latitude,longitude,foodLatitude,foodLongitude, result);
-                    distance =  (result[0]/1000.0 * 0.621);
+                    double distanceInKm =  (result[0]/1000.0 * 0.621);
+                    double distanceInMiles =  (Math.round(distanceInKm*100.0)/100.0);
 
-                    distance =  (Math.round(distance*100.0)/100.0);
-
-                    Log.d("distance", Double.toString(distance));
-                    results.add(new SearchResult(dishName, restaurantName, picture, Double.toString(distance)));
+                    results.add(new SearchResult(dishName, restaurantName, picture, Double.toString(distanceInMiles)));
                     searchResultsAdapter.notifyDataSetChanged();
 
                 } catch (JSONException e) {
