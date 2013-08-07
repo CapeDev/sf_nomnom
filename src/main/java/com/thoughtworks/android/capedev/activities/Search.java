@@ -106,18 +106,13 @@ public class Search extends NavigableActivity {
                 results.clear();
                 searchResultsAdapter.notifyDataSetChanged();
 
-                final LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-                Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-                String currentLatitude = (location!=null) ? String.valueOf(location.getLatitude()) : String.valueOf(latitude);
-                String currentLongitude = (location!=null) ? String.valueOf(location.getLongitude()) : String.valueOf(longitude);
                 String query = null;
                 try {
                     query = URLEncoder.encode(searchTerm, "utf-8");
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
-                String requestParameters = String.format("search_term=%s&latitude=%s&longitude=%s", query, currentLatitude , currentLongitude);
+                String requestParameters = String.format("search_term=%s", query);
                 Log.d("RequestParameters", requestParameters);
 
                 Log.i("RequestUrl", Domain.SERVER_URL + "/search?" + requestParameters);
@@ -206,6 +201,12 @@ public class Search extends NavigableActivity {
 
                 return;
             }
+
+            final LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+            latitude = (float) location.getLatitude();
+            longitude = (float) location.getLongitude();
 
             String restaurantName = "";
             String dishName = "";
