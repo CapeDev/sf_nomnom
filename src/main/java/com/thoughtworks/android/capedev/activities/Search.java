@@ -202,7 +202,7 @@ public class Search extends NavigableActivity {
                 toast.show();
 
                 searchBar.setQuery("",false);
-                
+
                 return;
             }
 
