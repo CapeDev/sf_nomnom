@@ -33,8 +33,10 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class Search extends NavigableActivity {
@@ -111,8 +113,13 @@ public class Search extends NavigableActivity {
 
                 String currentLatitude = (location!=null) ? String.valueOf(location.getLatitude()) : String.valueOf(latitude);
                 String currentLongitude = (location!=null) ? String.valueOf(location.getLongitude()) : String.valueOf(longitude);
-
-                String requestParameters = String.format("search_term=%s&latitude=%s&longitude=%s", searchTerm, currentLatitude , currentLongitude);
+                String query = null;
+                try {
+                    query = URLEncoder.encode(searchTerm, "utf-8");
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                String requestParameters = String.format("search_term=%s&latitude=%s&longitude=%s", query, currentLatitude , currentLongitude);
                 Log.d("RequestParameters", requestParameters);
 
                 Log.i("RequestUrl", Domain.SERVER_URL + "/search?" + requestParameters);
