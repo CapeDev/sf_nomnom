@@ -63,8 +63,7 @@ public class CameraActivity extends NavigableActivity {
                     toast = Toast.makeText(context, "Enter the name of the food!", Toast.LENGTH_SHORT);
                 } else if (restaurantName.getText().length() == 0) {
                     toast = Toast.makeText(context, "Enter the name of the restaurant!", Toast.LENGTH_SHORT);
-                }
-                else {
+                } else {
                     tracker.getLocation();
 
                     Bitmap photo = ((BitmapDrawable) foodPicture.getDrawable()).getBitmap();
@@ -90,10 +89,7 @@ public class CameraActivity extends NavigableActivity {
             }
         });
 
-
-        Button photoButton = (Button) this.findViewById(R.id.startCamera);
-        photoButton.setOnClickListener(new View.OnClickListener() {
-
+        foodPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);

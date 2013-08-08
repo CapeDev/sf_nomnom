@@ -5,49 +5,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-  <TextView android:id="@+id/foodNameLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:text="Food      :"/>
-
   <EditText android:id="@+id/foodName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/foodNameLabel"
-            android:layout_alignParentRight="true"/>
-
-  <TextView android:id="@+id/restaurantNameLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@id/foodName"
-            android:text="Restaurant:"/>
+            android:hint="Food Name"/>
 
   <EditText android:id="@+id/restaurantName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/restaurantNameLabel"
             android:layout_below="@id/foodName"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentLeft="true"
+            android:hint="Restaurant Name"/>
 
   <ImageView android:id="@+id/foodImage"
              android:layout_height="wrap_content"
              android:src="@drawable/icon"
              android:layout_width="wrap_content"
-             android:layout_below="@id/restaurantName"/>
-
-  <Button android:id="@+id/startCamera"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="Take Picture"
-          android:layout_alignParentRight="true"
-          android:layout_toRightOf="@id/foodImage"
-          android:layout_below="@id/restaurantName"/>
+             android:layout_toRightOf="@id/foodName"
+             android:layout_alignParentRight="true"/>
 
   <Button android:id="@+id/submitButton"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="Submit"
-          android:layout_below="@id/foodImage"/>
+          android:layout_below="@id/restaurantName"/>
 </RelativeLayout>
