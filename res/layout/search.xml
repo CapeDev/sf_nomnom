@@ -14,15 +14,6 @@
               android:queryHint="Crave something?"
       />
 
-  <TextView android:id="@+id/latitude"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-      />
-
-  <TextView android:id="@+id/longitude"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-      />
 
   <ListView xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent"

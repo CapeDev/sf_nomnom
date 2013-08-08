@@ -48,9 +48,6 @@ public class Search extends NavigableActivity {
 
     private Context context;
 
-    TextView latitudeTextView;
-    TextView longitudeTextView;
-
     Tracker tracker;
 
     @Override
@@ -71,14 +68,6 @@ public class Search extends NavigableActivity {
         searchResultsAdapter = new SearchResultsListAdapter(this, results);
         resultsList = (ListView) findViewById(R.id.results_list);
         resultsList.setAdapter(searchResultsAdapter);
-
-        latitudeTextView = (TextView) findViewById(R.id.latitude);
-        latitudeTextView.setTextColor(Color.RED);
-        latitudeTextView.setText("Latitiude:    " + String.valueOf(tracker.getLatitude()));
-
-        longitudeTextView = (TextView) findViewById(R.id.longitude);
-        longitudeTextView.setTextColor(Color.RED);
-        longitudeTextView.setText("Longitude    " + String.valueOf(tracker.getLongitude()));
 
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
