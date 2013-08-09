@@ -84,6 +84,9 @@ public class CameraActivity extends NavigableActivity {
                     new PostFoodItem().execute(nameValuePairs);
 
                     toast = Toast.makeText(getApplicationContext(), "Submitted!", Toast.LENGTH_SHORT);
+
+                    Intent intent = new Intent(CameraActivity.this.getApplicationContext(), Search.class);
+                    startActivity(intent);
                 }
                 toast.show();
             }

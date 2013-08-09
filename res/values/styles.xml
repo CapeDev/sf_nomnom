@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BlueTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/dActionBar</item>
+        <item name="android:background">#FEAA00</item>
+    </style>
+
+    <style name="dActionBar" parent="@android:style/Widget.Holo.ActionBar">
+        <item name="android:background">#0D56A6</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+</resources>

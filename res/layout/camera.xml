@@ -1,33 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
                 android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5">
 
-  <EditText android:id="@+id/foodName"
+            <EditText android:id="@+id/foodName"
+                      android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_alignParentLeft="true"
+                      android:hint="Food Name"
+                      android:layout_margin="5dp"/>
+
+            <EditText android:id="@+id/restaurantName"
+                      android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_alignParentLeft="true"
+                      android:hint="Restaurant Name"
+                      android:layout_margin="5dp" />
+
+        </LinearLayout>
+¡
+        <ImageView android:id="@+id/foodImage"
+                   android:contentDescription="food"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/camera"
+                   android:layout_width="fill_parent"
+                   android:layout_weight="0.5"
+                   android:layout_toRightOf="@id/foodName"
+                   android:layout_alignParentRight="true"
+                   android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+
+    <Button android:id="@+id/submitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:hint="Food Name"/>
-
-  <EditText android:id="@+id/restaurantName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/foodName"
-            android:layout_alignParentLeft="true"
-            android:hint="Restaurant Name"/>
-
-  <ImageView android:id="@+id/foodImage"
-             android:layout_height="wrap_content"
-             android:src="@drawable/camera"
-             android:layout_width="wrap_content"
-             android:layout_toRightOf="@id/foodName"
-             android:layout_alignParentRight="true"/>
-
-  <Button android:id="@+id/submitButton"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="Submit"
-          android:layout_below="@id/restaurantName"/>
-</RelativeLayout>
+            android:text="Submit"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@id/restaurantName"/>
+</LinearLayout>
